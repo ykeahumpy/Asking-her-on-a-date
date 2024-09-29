@@ -1,23 +1,52 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-
+const fs = require('fs');
+const path = require('path');
 const app = express();
-app.use(cors());
-app.use(bodyParser.json());
+const PORT = process.env.PORT || 3000;
 
-// Store selections
-let selections = [];
+// Middleware to parse incoming request bodies
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.post('/menu-selection', (req, res) => {
-    selections.push(req.body);
-    res.status(200).send('Selection received!');
+// In-memory data store (can be replaced with a database like MongoDB)
+let orders = [];
+let responses = [];
+
+// Serve static files (HTML, CSS, JS)
+app.use(express.static(path.join(__dirname, '../')));
+
+// Route to handle order submission
+app.post('/submit-order', (req, res) => {
+    const { order } = req.body;
+    if (order) {
+        orders.push(order);
+        res.status(200).json({ message: 'Order received successfully.' });
+    } else {
+        res.status(400).json({ message: 'Invalid order data.' });
+    }
 });
 
-app.get('/menu-selections', (req, res) => {
-    res.json(selections);
+// Route to handle yes/no response
+app.post('/submit-response', (req, res) => {
+    const { response } = req.body;
+    if (response === 'yes' || response === 'no') {
+        responses.push(response);
+        res.status(200).json({ message: 'Response recorded successfully.' });
+    } else {
+        res.status(400).json({ message: 'Invalid response.' });
+    }
 });
 
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+// Admin route to view all orders and responses
+app.get('/admin', (req, res) => {
+    const data = {
+        orders,
+        responses
+    };
+    res.status(200).json(data);
+});
+
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
