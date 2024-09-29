@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Menu</title>
-    <link rel="icon" href="heart.jpg">
+    <link rel="icon" href="heart.jpg" />
     <link rel="stylesheet" href="date_style.css" />
   </head>
   <body>
@@ -109,21 +109,20 @@
       }
 
       function submitMenu() {
-    localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
-    const date = new URLSearchParams(window.location.search).get('date'); 
-    fetch('http://192.168.100.39/:3000/menu-selection', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ items: selectedItems, date: date })
-    }).then(response => {
-        if (response.ok) {
+        localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
+        const date = new URLSearchParams(window.location.search).get("date");
+        fetch("http://192.168.100.39:3000/menu-selections", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ items: selectedItems, date: date }),
+        }).then((response) => {
+          if (response.ok) {
             window.location.href = "rating.html?date=" + date;
-        }
-    });
-}
-
+          }
+        });
+      }
 
       function displaySelectedItems() {
         const display = document.getElementById("selectedItemsDisplay");
