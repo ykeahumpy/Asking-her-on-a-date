@@ -110,18 +110,8 @@
 
       function submitMenu() {
         localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
-        const date = new URLSearchParams(window.location.search).get("date");
-        fetch("http://localhost:3000/menu-selections", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ items: selectedItems, date: date }),
-        }).then((response) => {
-          if (response.ok) {
-            window.location.href = "rating.html?date=" + date;
-          }
-        });
+        const date = new URLSearchParams(window.location.search).get("date"); // Fetching date
+        window.location.href = `rating.html?date=${date}`; // Redirect to rating page with date
       }
 
       function displaySelectedItems() {
