@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu</title>
+    <link rel="icon" href="heart.jpg">
+    <link rel="stylesheet" href="date_style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Menu for 2–3 Servings ❤️</h1>
+      <p>Choose what you love! 😘</p>
+      <ul class="menu-list">
+        <!-- Pasta Trays -->
+        <h3>Pasta Tray</h3>
+        <li onclick="selectItem('🍝 Baked Mac - ₱45')">🍝 Baked Mac - ₱45</li>
+        <li onclick="selectItem('🍝 Lasagna - ₱50')">🍝 Lasagna - ₱50</li>
+        <li onclick="selectItem('🍝 Palabok - ₱45')">🍝 Palabok - ₱45</li>
+        <li onclick="selectItem('🍝 Spaghetti - ₱45')">🍝 Spaghetti - ₱45</li>
+        <li onclick="selectItem('🍝 Fettuccine - ₱50')">🍝 Fettuccine - ₱50</li>
+
+        <!-- Rice Meals -->
+        <h3>Rice Meals</h3>
+        <li onclick="selectItem('🍛 Baked Liempo - ₱65')">
+          🍛 Baked Liempo - ₱65
+        </li>
+        <li onclick="selectItem('🍛 Chicken Roll - ₱65')">
+          🍛 Chicken Roll - ₱65
+        </li>
+        <li onclick="selectItem('🍛 Fried Chicken - ₱60')">
+          🍛 Fried Chicken - ₱60
+        </li>
+        <li onclick="selectItem('🍛 Valenciana - ₱70')">🍛 Valenciana - ₱70</li>
+        <li onclick="selectItem('🍛 Morcon - ₱70')">🍛 Morcon - ₱70</li>
+        <li onclick="selectItem('🍛 Dinuguan - ₱60')">🍛 Dinuguan - ₱60</li>
+        <li onclick="selectItem('🍛 Lengua - ₱70')">🍛 Lengua - ₱70</li>
+        <li onclick="selectItem('🍛 Kare-Kare - ₱75')">🍛 Kare-Kare - ₱75</li>
+
+        <!-- Sizzling and Silog Meals -->
+        <h3>Sizzling</h3>
+        <li onclick="selectItem('🔥 Sizzling Pork Sisig - ₱75')">
+          🔥 Sizzling Pork Sisig - ₱75
+        </li>
+        <li onclick="selectItem('🔥 Sizzling Chicken Sisig - ₱75')">
+          🔥 Sizzling Chicken Sisig - ₱75
+        </li>
+
+        <h3>Silog Meals</h3>
+        <li onclick="selectItem('🍳 Longsilog - ₱60')">🍳 Longsilog - ₱60</li>
+        <li onclick="selectItem('🍳 Tapsilog - ₱70')">🍳 Tapsilog - ₱70</li>
+        <li onclick="selectItem('🍳 Embosilog - ₱65')">🍳 Embosilog - ₱65</li>
+
+        <!-- Sandwiches -->
+        <h3>Sandwiches</h3>
+        <li onclick="selectItem('🥪 Cheeseburger - ₱30')">
+          🥪 Cheeseburger - ₱30
+        </li>
+        <li onclick="selectItem('🥪 Hamburger - ₱30')">🥪 Hamburger - ₱30</li>
+        <li onclick="selectItem('🥪 Chicken Sandwich - ₱35')">
+          🥪 Chicken Sandwich - ₱35
+        </li>
+        <li onclick="selectItem('🥪 Clubhouse - ₱35')">🥪 Clubhouse - ₱35</li>
+        <li onclick="selectItem('🥪 Footlong w/ Cheese - ₱35')">
+          🥪 Footlong w/ Cheese - ₱35
+        </li>
+
+        <!-- Desserts -->
+        <h3>Desserts</h3>
+        <li onclick="selectItem('🍨 Fruit Salad - ₱35')">
+          🍨 Fruit Salad - ₱35
+        </li>
+        <li onclick="selectItem('🍮 Leche Flan - ₱35')">🍮 Leche Flan - ₱35</li>
+        <li onclick="selectItem('🍧 Mais Con Yelo - ₱30')">
+          🍧 Mais Con Yelo - ₱30
+        </li>
+
+        <!-- Beverages -->
+        <h3>Beverages</h3>
+        <li onclick="selectItem('🥤 Mango Shake - ₱50')">
+          🥤 Mango Shake - ₱50
+        </li>
+        <li onclick="selectItem('🥤 Banana Shake - ₱50')">
+          🥤 Banana Shake - ₱50
+        </li>
+        <li onclick="selectItem('🥤 Royal - ₱30')">🥤 Royal - ₱30</li>
+        <li onclick="selectItem('🥤 Iced Tea - ₱30')">🥤 Iced Tea - ₱30</li>
+        <li onclick="selectItem('🥤 Pineapple Juice - ₱30')">
+          🥤 Pineapple Juice - ₱30
+        </li>
+      </ul>
+      <br />
+      <button class="option" onclick="submitMenu()">
+        I'm done choosing! 💖
+      </button>
+      <div id="selectedItemsDisplay" style="margin-top: 20px"></div>
+    </div>
+
+    <script>
+      const selectedItems = [];
+
+      function selectItem(item) {
+        if (!selectedItems.includes(item)) {
+          selectedItems.push(item);
+          alert(`${item} has been added to your selection!`);
+        } else {
+          alert(`${item} is already in your selection!`);
+        }
+      }
+
+      function submitMenu() {
+    localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
+    const date = new URLSearchParams(window.location.search).get('date'); 
+    fetch('http://localhost:3000/menu-selection', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ items: selectedItems, date: date })
+    }).then(response => {
+        if (response.ok) {
+            window.location.href = "rating.html?date=" + date;
+        }
+    });
+}
+
+
+      function displaySelectedItems() {
+        const display = document.getElementById("selectedItemsDisplay");
+        display.innerHTML = `<h3>Your Selected Items:</h3><ul>${selectedItems
+          .map((item) => `<li>${item}</li>`)
+          .join("")}</ul>`;
+      }
+    </script>
+  </body>
+</html>

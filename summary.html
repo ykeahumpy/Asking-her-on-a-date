@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary of Our Date 😊</title>
+    <link rel="icon" href="heart.jpg">
+    <link rel="stylesheet" href="summary-styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>I'm Excited for Our Date! 🎉</h1>
+        <p id="summary"></p>
+        <h2><br> <br>I love youu, my love. See youu! &#x1F617;❤️</h2>
+        
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const date = params.get('date'); // Ensure the date is being fetched
+        const selectedItems = JSON.parse(localStorage.getItem("selectedItems")) || [];
+        const name = "Gabriel Ian C. Mustera";
+
+        // Check if date is not null
+        if (date) {
+            document.getElementById('summary').innerText = 
+                `You're going on a date with ${name} on ${date} at Doc Jones in Sta. Maria Bulacan. 
+
+                You have chosen: ${selectedItems.join(', ') || 'No items selected.'}`;
+        } else {
+            document.getElementById('summary').innerText = 
+                "It seems we couldn't retrieve the date. Please try again.";
+        }
+    </script>
+</body>
+</html>

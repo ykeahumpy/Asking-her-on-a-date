@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pick a Date</title>
+    <link rel="icon" href="heart.jpg">
+    <link rel="stylesheet" href="date_style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Choose a date for our special day! ❤️</h1>
+        <p>Pick a day you're free so we can plan our date, love!</p>
+        <input type="date" id="date" class="date-picker">
+        <br><br>
+        <button class="option" onclick="selectDate()">Submit 💖</button>
+    </div>
+
+    <script>
+        function selectDate() {
+            const date = document.getElementById('date').value;
+            if (date) {
+                window.location.href = `menu.html?date=${date}`;
+            } else {
+                alert('Please choose a date, love!');
+            }
+        }
+    </script>
+</body>
+</html>

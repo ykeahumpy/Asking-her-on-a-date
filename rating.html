@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How Excited Are You?</title>
+    <link rel="icon" href="heart.jpg">
+    <link rel="stylesheet" href="date_style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>How excited are you for our date? 😊</h1>
+
+      <input
+        type="range"
+        id="excitement"
+        min="1"
+        max="5"
+        value="3"
+        class="option"
+        oninput="updateEmoji()"
+      />
+      <p id="emoji">🙂</p>
+      <br />
+      <button class="option" onclick="submitRating()">Submit 💕</button>
+
+      <h2>Your Selected Menu Order:</h2>
+      <ul id="selectedMenuItems"></ul>
+    </div>
+
+    <script>
+      function updateEmoji() {
+        const value = document.getElementById("excitement").value;
+        const emoji = document.getElementById("emoji");
+        const emojis = ["😢", "😐", "🙂", "😊", "😍"];
+        emoji.innerHTML = emojis[value - 1];
+      }
+
+      function submitRating() {
+        const date = new URLSearchParams(window.location.search).get("date"); // Get date from URL
+        window.location.href = `summary.html?date=${date}`; // Redirect to summary page with date
+      }
+
+      // Display selected menu items
+      const selectedItems =
+        JSON.parse(localStorage.getItem("selectedItems")) || [];
+      const menuList = document.getElementById("selectedMenuItems");
+
+      selectedItems.forEach((item) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = item;
+        menuList.appendChild(listItem);
+      });
+    </script>
+  </body>
+</html>

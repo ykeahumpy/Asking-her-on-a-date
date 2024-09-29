@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Date</title>
+    <link rel="icon" href="heart.jpg">
+    <link rel="stylesheet" href="date_style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Hello, Love! ❤️</h1>
+        <p>How are you feeling today?</p>
+        <button class="option" onclick="notOkay()">I'm not okay, love 😔</button>
+        <button class="option" onclick="moreThanOkay()">I'm more than okay, love 😊</button>
+
+        <div id="message" class="message"></div>
+        <div id="date-question" class="date-question hidden">
+            <p id="date_question">Would you like to go on a date with me at Doc Jones, Sta. Maria Bulacan? 😘</p>
+            <button id="yesBTN" class="option" onclick="askForDate('yes')">Yes 💕</button>
+            <button id="noBTN" class="option" onclick="askForDate('no')">No 😢</button>
+        </div>
+    </div>
+
+    <script src="date_js.js"></script>
+</body>
+</html>
