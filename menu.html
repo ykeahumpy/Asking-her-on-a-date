@@ -111,7 +111,7 @@
       function submitMenu() {
     localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
     const date = new URLSearchParams(window.location.search).get('date'); 
-    fetch('http://localhost:3000/menu-selection', {
+    fetch('http://192.168.100.39/:3000/menu-selection', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
