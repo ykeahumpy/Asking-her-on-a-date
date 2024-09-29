@@ -28,29 +28,42 @@
       <ul id="selectedMenuItems"></ul>
     </div>
 
-    <script>
-      function updateEmoji() {
-        const value = document.getElementById("excitement").value;
-        const emoji = document.getElementById("emoji");
-        const emojis = ["😢", "😐", "🙂", "😊", "😍"];
-        emoji.innerHTML = emojis[value - 1];
-      }
-
-      function submitRating() {
-        const date = new URLSearchParams(window.location.search).get("date"); // Get date from URL
-        window.location.href = `summary.html?date=${date}`; // Redirect to summary page with date
-      }
-
-      // Display selected menu items
-      const selectedItems =
-        JSON.parse(localStorage.getItem("selectedItems")) || [];
-      const menuList = document.getElementById("selectedMenuItems");
-
-      selectedItems.forEach((item) => {
-        const listItem = document.createElement("li");
-        listItem.textContent = item;
-        menuList.appendChild(listItem);
-      });
-    </script>
+    <select id="excitement" onchange="updateEmoji()">
+        <option value="1">😢</option>
+        <option value="2">😐</option>
+        <option value="3">🙂</option>
+        <option value="4">😊</option>
+        <option value="5">😍</option>
+      </select>
+      <div id="emoji">😢</div>
+      
+      <button onclick="submitRating()">Submit Rating</button>
+      
+      <ul id="selectedMenuItems"></ul>
+      
+      <script>
+        function updateEmoji() {
+          const value = document.getElementById("excitement").value;
+          const emoji = document.getElementById("emoji");
+          const emojis = ["😢", "😐", "🙂", "😊", "😍"];
+          emoji.innerHTML = emojis[value - 1];
+        }
+      
+        function submitRating() {
+          const date = new URLSearchParams(window.location.search).get("date");
+          const selectedItems = JSON.parse(localStorage.getItem("selectedItems")) || [];
+          window.location.href = `summary.html?date=${date}&items=${encodeURIComponent(JSON.stringify(selectedItems))}`;
+        }
+      
+        const selectedItems = JSON.parse(localStorage.getItem("selectedItems")) || [];
+        const menuList = document.getElementById("selectedMenuItems");
+      
+        selectedItems.forEach((item) => {
+          const listItem = document.createElement("li");
+          listItem.textContent = item;
+          menuList.appendChild(listItem);
+        });
+      </script>
+      
   </body>
 </html>
