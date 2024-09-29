@@ -109,10 +109,11 @@
       }
 
       function submitMenu() {
-        localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
-        const date = new URLSearchParams(window.location.search).get("date"); // Fetching date
-        window.location.href = `rating.html?date=${date}`; // Redirect to rating page with date
-      }
+    localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
+    const date = new URLSearchParams(window.location.search).get("date"); // Fetching date
+    const itemsString = encodeURIComponent(JSON.stringify(selectedItems)); // Stringify and encode selected items
+    window.location.href = `rating.html?date=${date}&items=${itemsString}`; // Redirect to rating page with date and items
+}
 
       function displaySelectedItems() {
         const display = document.getElementById("selectedItemsDisplay");
