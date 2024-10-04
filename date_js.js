@@ -41,7 +41,7 @@ function askForDate(answer) {
         } else if (rejectionCount == 2) {
             messageDiv.innerHTML = "Please, my love 🥺";
             showDateQuestion();
-        } else {
+        } else if(rejectionCount == 3){
             noButton.style.position = "absolute"; // Ensure the button can be positioned absolutely
             moveNoButtonToRandomPosition(noButton);
         }
