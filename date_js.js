@@ -21,6 +21,8 @@ function showDateQuestion() {
     document.getElementById('date-question').classList.remove('hidden');
 }
 
+let rejectionCount = 0; // Initialize the rejection count
+
 function askForDate(answer) {
     var yesButton = document.getElementById('yesBTN');
     var noButton = document.getElementById('noBTN');
@@ -39,12 +41,26 @@ function askForDate(answer) {
         } else if (rejectionCount == 2) {
             messageDiv.innerHTML = "Please, my love 🥺";
             showDateQuestion();
-        } else{
-            messageDiv.innerHTML = "I understand, we can go next time love.";
-            yesButton.hidden = true;
-            noButton.hidden = true;
-            date_question.hidden = true;
+        } else {
+            noButton.style.position = "absolute"; // Ensure the button can be positioned absolutely
+            moveNoButtonToRandomPosition(noButton);
         }
     }
 }
+
+// Function to move the "no" button to a random position
+function moveNoButtonToRandomPosition(button) {
+    // Get the dimensions of the window
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    // Generate random x and y positions
+    const randomX = Math.random() * (windowWidth - button.offsetWidth);
+    const randomY = Math.random() * (windowHeight - button.offsetHeight);
+
+    // Set the new position of the button
+    button.style.left = `${randomX}px`;
+    button.style.top = `${randomY}px`;
+}
+
 
