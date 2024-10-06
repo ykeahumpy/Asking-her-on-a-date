@@ -21,33 +21,6 @@ function showDateQuestion() {
     document.getElementById('date-question').classList.remove('hidden');
 }
 
-let rejectionCount = 0; // Initialize the rejection count
-
-function askForDate(answer) {
-    var yesButton = document.getElementById('yesBTN');
-    var noButton = document.getElementById('noBTN');
-    var date_question = document.getElementById('date_question');
-
-    if (answer === 'yes') {
-        // Redirect to date picker
-        window.location.href = "date-picker.html";
-    } else {
-        rejectionCount++;
-        const messageDiv = document.getElementById('message');
-
-        if (rejectionCount == 1) {
-            messageDiv.innerHTML = "Please, let's go on a date 🥺💕";
-            showDateQuestion();
-        } else if (rejectionCount == 2) {
-            messageDiv.innerHTML = "Please, my love 🥺";
-            showDateQuestion();
-        } else if(rejectionCount == 3){
-            noButton.style.position = "absolute"; // Ensure the button can be positioned absolutely
-            moveNoButtonToRandomPosition(noButton);
-        }
-    }
-}
-
 // Function to move the "no" button to a random position
 function moveNoButtonToRandomPosition(button) {
     // Get the dimensions of the window
