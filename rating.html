@@ -38,14 +38,17 @@
         emoji.innerHTML = emojis[value - 1];
       }
 
+      
       function submitRating() {
-        const date = new URLSearchParams(window.location.search).get("date");
-        const selectedItems =
-          JSON.parse(localStorage.getItem("selectedItems")) || [];
-        window.location.href = `summary.html?date=${date}&items=${encodeURIComponent(
-          JSON.stringify(selectedItems)
-        )}`;
-      }
+    const date = new URLSearchParams(window.location.search).get("date");
+    const selectedItems = JSON.parse(localStorage.getItem("selectedItems")) || [];
+    const excitementValue = document.getElementById("excitement").value; // Get excitement rating
+
+    // Pass the excitement rating along with the date and selected items to the summary page
+    window.location.href = `summary.html?date=${date}&items=${encodeURIComponent(
+      JSON.stringify(selectedItems)
+    )}&excitement=${excitementValue}`;
+}
 
       const selectedItems =
         JSON.parse(localStorage.getItem("selectedItems")) || [];
