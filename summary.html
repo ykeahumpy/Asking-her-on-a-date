@@ -6,12 +6,13 @@
     <title>Summary of Our Date 😊</title>
     <link rel="icon" href="heart.jpg">
     <link rel="stylesheet" href="summary-styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="screenshotArea"> <!-- Add an ID to the container -->
         <h1>I'm Excited for Our Date! 🎉</h1>
         <p id="summary"></p>
-        <p id="excitementDisplay"></p> <!-- Add a section to display the excitement emoji -->
+        <p id="excitementDisplay"></p>
         <h2><br> <br>I love youu, my love. See youu! &#x1F617;❤️</h2>
     </div>
 
@@ -19,23 +20,34 @@
         const params = new URLSearchParams(window.location.search);
         const date = params.get('date');
         const selectedItems = JSON.parse(localStorage.getItem("selectedItems")) || [];
-        const excitementValue = params.get('excitement'); // Retrieve excitement rating
+        const excitementValue = params.get('excitement');
         const name = "Gabriel Ian C. Mustera";
 
-        // Check if date is not null
         if (date) {
             document.getElementById('summary').innerText = 
-                `You're going on a date with ${name} on ${date} at Doc Jones Sta. Maria Bulacan. 
+                `You're going on a date with ${name} on ${date} at Doc Jones in Sta. Maria Bulacan. 
 
                 You have chosen: ${selectedItems.join(', ') || 'No items selected.'}`;
 
-            // Display the corresponding excitement emoji
             const emojis = ["😢", "😐", "🙂", "😊", "😍"];
-            const excitementEmoji = emojis[excitementValue - 1]; // Get emoji based on excitement value
-            document.getElementById('excitementDisplay').innerText = `You're feeling: ${excitementEmoji} on our date!`;
+            const excitementEmoji = emojis[excitementValue - 1];
+            document.getElementById('excitementDisplay').innerText = `You're feeling: ${excitementEmoji}`;
+            
+            // Call the function to take a screenshot
+            takeScreenshot();
         } else {
             document.getElementById('summary').innerText = 
                 "It seems we couldn't retrieve the date. Please try again.";
+        }
+
+        function takeScreenshot() {
+            html2canvas(document.getElementById('screenshotArea')).then(canvas => {
+                // Create a link element
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL(); // Convert canvas to data URL
+                link.download = 'summary_screenshot.png'; // Set the file name for download
+                link.click(); // Trigger the download
+            });
         }
     </script>
 </body>
