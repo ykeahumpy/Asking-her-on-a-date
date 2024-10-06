@@ -1,4 +1,4 @@
-let rejectionCount = 0;
+ let rejectionCount = 0;
 
 function notOkay() {
     const messageDiv = document.getElementById('message');
