@@ -25,13 +25,13 @@
 
         if (date) {
             document.getElementById('summary').innerText = 
-                `You're going on a date with ${name} on ${date} at Doc Jones in Sta. Maria Bulacan. 
+                `You're going on a date with ${name} on ${date} at Doc Jones Sta. Maria Bulacan. 
 
                 You have chosen: ${selectedItems.join(', ') || 'No items selected.'}`;
 
             const emojis = ["😢", "😐", "🙂", "😊", "😍"];
             const excitementEmoji = emojis[excitementValue - 1];
-            document.getElementById('excitementDisplay').innerText = `You're feeling: ${excitementEmoji}`;
+            document.getElementById('excitementDisplay').innerText = `You're feeling: ${excitementEmoji} on our date!`;
             
             // Call the function to take a screenshot
             takeScreenshot();
