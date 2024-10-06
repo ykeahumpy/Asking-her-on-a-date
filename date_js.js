@@ -2,13 +2,13 @@
 
 function notOkay() {
     const messageDiv = document.getElementById('message');
-    messageDiv.innerHTML = "Aww, love. Don't worry, I'm always here for you! 💖";
+    messageDiv.innerHTML = "Aww, Don't worry, I'm always here for you! 💖";
     showOkayButton();
 }
 
 function moreThanOkay() {
     const messageDiv = document.getElementById('message');
-    messageDiv.innerHTML = "Yay! I'm glad you're feeling great, love! 😘";
+    messageDiv.innerHTML = "Yeyy! I'm glad you're feeling great, love! 😘";
     showOkayButton();
 }
 
